@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator, ScrollView } from "react-native";
 import React from "react";
 import { useMovies } from "@/presentation/hooks/useMovies";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -7,7 +7,7 @@ import MovieHorizontalList from "@/presentation/components/movies/MovieHorizonta
 
 const HomeScreen = () => {
   const safeArea = useSafeAreaInsets()
-  const { nowPlayingQuery, popularQuery, topRatedQuery } = useMovies();
+  const { nowPlayingQuery, popularQuery, topRatedQuery, upcomingQuery } = useMovies();
 
   if (nowPlayingQuery.isLoading) {
     return (
@@ -18,13 +18,15 @@ const HomeScreen = () => {
   }
 
   return (
+    <ScrollView>
     <View style={{...style.container, paddingTop: safeArea.top}}>
       <Text style={style.titleStyle}>Movies App</Text>
       <MainSlideshow movies={nowPlayingQuery.data ?? []}/>
       <MovieHorizontalList title="Populares" movies={popularQuery.data ?? []}/>
       <MovieHorizontalList title="Mejor calificadas" movies={topRatedQuery.data ?? []}/>
-
+      <MovieHorizontalList title="Proximamene en cines" movies={upcomingQuery.data ?? []}/>
     </View>
+    </ScrollView>
   );
 };
 
@@ -36,6 +38,7 @@ const style = StyleSheet.create({
   },
   container: {
     marginTop: 2,
+    paddingBottom: 10
   },
   titleStyle: {
     fontSize: 24,
