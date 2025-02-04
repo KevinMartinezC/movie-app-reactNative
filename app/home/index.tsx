@@ -7,7 +7,7 @@ import MovieHorizontalList from "@/presentation/components/movies/MovieHorizonta
 
 const HomeScreen = () => {
   const safeArea = useSafeAreaInsets()
-  const { nowPlayingQuery, popularQuery } = useMovies();
+  const { nowPlayingQuery, popularQuery, topRatedQuery } = useMovies();
 
   if (nowPlayingQuery.isLoading) {
     return (
@@ -22,6 +22,8 @@ const HomeScreen = () => {
       <Text style={style.titleStyle}>Movies App</Text>
       <MainSlideshow movies={nowPlayingQuery.data ?? []}/>
       <MovieHorizontalList title="Populares" movies={popularQuery.data ?? []}/>
+      <MovieHorizontalList title="Mejor calificadas" movies={topRatedQuery.data ?? []}/>
+
     </View>
   );
 };

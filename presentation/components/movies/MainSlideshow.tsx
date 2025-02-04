@@ -1,5 +1,4 @@
-import { useRef } from "react";
-import { View, Text, useWindowDimensions, StyleSheet } from "react-native";
+import { View, useWindowDimensions, StyleSheet } from "react-native";
 
 import Carousel from "react-native-reanimated-carousel";
 
