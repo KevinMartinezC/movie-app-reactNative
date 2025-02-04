@@ -5,14 +5,13 @@ interface Props {
   id: number;
   posterUrl: string;
   smallPoster?: boolean;
-  styles?: string;
 }
-const MoviePoster = ({ posterUrl, id, smallPoster = false, styles }: Props) => {
+const MoviePoster = ({ posterUrl, id, smallPoster = false }: Props) => {
   return (
     <Pressable
       style={({ pressed }) => [
-        { styles },
         pressed ? { opacity: 0.7 } : { opacity: 1 },
+        style.container,
       ]}
     >
       <Image
@@ -32,9 +31,12 @@ const MoviePoster = ({ posterUrl, id, smallPoster = false, styles }: Props) => {
 
 const style = StyleSheet.create({
   image: {
-    // width: "100%",
-    // height: "100%",
+    width: "100%",
+    height: "100%",
     borderRadius: 16,
+  },
+  container: {
+    paddingHorizontal: 2,
   },
 });
 export default MoviePoster;

@@ -3,10 +3,11 @@ import React from "react";
 import { useMovies } from "@/presentation/hooks/useMovies";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import MainSlideshow from "@/presentation/components/movies/MainSlideshow";
+import MovieHorizontalList from "@/presentation/components/movies/MovieHorizontalList";
 
 const HomeScreen = () => {
   const safeArea = useSafeAreaInsets()
-  const { nowPlayingQuery } = useMovies();
+  const { nowPlayingQuery, popularQuery } = useMovies();
 
   if (nowPlayingQuery.isLoading) {
     return (
@@ -20,6 +21,7 @@ const HomeScreen = () => {
     <View style={{...style.container, paddingTop: safeArea.top}}>
       <Text style={style.titleStyle}>Movies App</Text>
       <MainSlideshow movies={nowPlayingQuery.data ?? []}/>
+      <MovieHorizontalList title="Populares" movies={popularQuery.data ?? []}/>
     </View>
   );
 };
@@ -37,7 +39,7 @@ const style = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     paddingHorizontal: 16,
-    marginBottom: 2
+    marginBottom: 2,
   }
 });
 

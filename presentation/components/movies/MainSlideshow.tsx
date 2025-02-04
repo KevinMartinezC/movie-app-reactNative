@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { View, Text, useWindowDimensions } from "react-native";
+import { View, Text, useWindowDimensions, StyleSheet } from "react-native";
 
 import Carousel from "react-native-reanimated-carousel";
 
@@ -14,18 +14,15 @@ const MainSlideshow = ({ movies }: Props) => {
   const width = useWindowDimensions().width;
 
   return (
-    <View className="h-[250px] w-full">
+    <View style={style.container}>
       <Carousel
         data={movies}
-        renderItem={({ item }) => <MoviePoster id={item.id} posterUrl={item.poster}/>}
+        renderItem={({ item }) => (
+          <MoviePoster id={item.id} posterUrl={item.poster} />
+        )}
         width={200}
         height={350}
-        style={{
-          width: width,
-          height: 350,
-          justifyContent: "center",
-          alignItems: "center",
-        }}
+        style={[{ width: width }, style.carouselStyle]}
         mode="parallax"
         modeConfig={{
           parallaxScrollingScale: 0.9,
@@ -36,5 +33,17 @@ const MainSlideshow = ({ movies }: Props) => {
     </View>
   );
 };
+
+const style = StyleSheet.create({
+  container: {
+    height: 250,
+    width: "100%",
+  },
+  carouselStyle: {
+    height: 350,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+});
 
 export default MainSlideshow;
