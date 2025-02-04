@@ -1,4 +1,10 @@
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ActivityIndicator,
+  ScrollView,
+} from "react-native";
 import React from "react";
 import { useMovies } from "@/presentation/hooks/useMovies";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -6,8 +12,9 @@ import MainSlideshow from "@/presentation/components/movies/MainSlideshow";
 import MovieHorizontalList from "@/presentation/components/movies/MovieHorizontalList";
 
 const HomeScreen = () => {
-  const safeArea = useSafeAreaInsets()
-  const { nowPlayingQuery, popularQuery, topRatedQuery, upcomingQuery } = useMovies();
+  const safeArea = useSafeAreaInsets();
+  const { nowPlayingQuery, popularQuery, topRatedQuery, upcomingQuery } =
+    useMovies();
 
   if (nowPlayingQuery.isLoading) {
     return (
@@ -19,13 +26,23 @@ const HomeScreen = () => {
 
   return (
     <ScrollView>
-    <View style={{...style.container, paddingTop: safeArea.top}}>
-      <Text style={style.titleStyle}>Movies App</Text>
-      <MainSlideshow movies={nowPlayingQuery.data ?? []}/>
-      <MovieHorizontalList title="Populares" movies={popularQuery.data ?? []}/>
-      <MovieHorizontalList title="Mejor calificadas" movies={topRatedQuery.data ?? []}/>
-      <MovieHorizontalList title="Proximamene en cines" movies={upcomingQuery.data ?? []}/>
-    </View>
+      <View style={{ ...style.container, paddingTop: safeArea.top }}>
+        <Text style={style.titleStyle}>Movies App</Text>
+        <MainSlideshow movies={nowPlayingQuery.data ?? []} />
+        <MovieHorizontalList
+          title="Populares"
+          movies={popularQuery.data ?? []}
+        />
+        <MovieHorizontalList
+          title="Mejor calificadas"
+          movies={topRatedQuery.data?.pages.flat() ?? []}
+          loadNextPage={topRatedQuery.fetchNextPage}
+        />
+        <MovieHorizontalList
+          title="Proximamene en cines"
+          movies={upcomingQuery.data ?? []}
+        />
+      </View>
     </ScrollView>
   );
 };
@@ -38,14 +55,14 @@ const style = StyleSheet.create({
   },
   container: {
     marginTop: 2,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   titleStyle: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     paddingHorizontal: 16,
     marginBottom: 2,
-  }
+  },
 });
 
 export default HomeScreen;

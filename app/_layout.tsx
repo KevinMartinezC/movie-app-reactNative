@@ -1,5 +1,4 @@
 import React from "react";
-import { View, Text } from "react-native";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Stack } from "expo-router";
 
