@@ -1,14 +1,19 @@
-import { nowPLayingAction } from '@/core/actions/movies/now-playing.actions';
-import React from 'react';
-import { View, Text } from 'react-native';
+import React from "react";
+import { View, Text } from "react-native";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Stack } from "expo-router";
+
+const queryClient = new QueryClient(); //almacena estados de peticiones, encarga llamadas
 
 const RootLayout = () => {
-
-  nowPLayingAction()
   return (
-    <View>
-      <Text>Hello, World!</Text>
-    </View>
+    <QueryClientProvider client={queryClient}>
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
+    </QueryClientProvider>
   );
 };
 
