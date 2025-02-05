@@ -16,7 +16,7 @@ export interface CompleteMovie extends Movie {
   productionCompanies: string[];
 }
 
-export interface Cast {
+export interface Actor {
   id: number;
   name: string;
   character: string;
