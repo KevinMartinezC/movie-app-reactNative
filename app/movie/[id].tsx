@@ -1,16 +1,47 @@
-import { View, Text } from "react-native";
+import {
+  View,
+  Text,
+  ActivityIndicator,
+  StyleSheet,
+  ScrollView,
+} from "react-native";
 import React from "react";
 import { useLocalSearchParams } from "expo-router";
-import { getMovieByIdAction } from "@/core/actions/movies/movie/get-movie-by-id.action";
+import { useMovie } from "@/presentation/hooks/useMovie";
+import MovieHeader from "@/presentation/components/movie/MovieHeader";
 
 const MovieScreen = () => {
   const { id } = useLocalSearchParams();
+  const { movieQuery } = useMovie(+id);
+
+  if (movieQuery.isLoading || !movieQuery.data) {
+    return (
+      <View style={style.activityIndicatorContainer}>
+        <Text style={style.textStyle}>Espere por favor</Text>
+        <ActivityIndicator color="purple" size={30} />
+      </View>
+    );
+  }
 
   return (
-    <View>
-      <Text>Movie Screen</Text>
-    </View>
+    <ScrollView>
+      <MovieHeader
+        poster={movieQuery.data.poster}
+        originalTitle={movieQuery.data.originalTitle}
+        title={movieQuery.data.title}
+      />
+    </ScrollView>
   );
 };
 
+const style = StyleSheet.create({
+  activityIndicatorContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  textStyle: {
+    marginBottom: 4,
+  },
+});
 export default MovieScreen;
