@@ -1,7 +1,15 @@
-import { View, Text, StyleSheet, useWindowDimensions, Image, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  useWindowDimensions,
+  Image,
+  Pressable,
+} from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface Props {
   poster: string;
@@ -13,6 +21,11 @@ const MovieHeader = ({ poster, originalTitle, title }: Props) => {
   const { height: screenHight } = useWindowDimensions();
   return (
     <>
+      <LinearGradient
+        start={[0, 0]}
+        colors={["rgba(0,0,0,0.3)", "transparent"]}
+        style={{ ...style.gradientStyle, height: screenHight * 0.4 }}
+      />
       <View style={style.iconStyle}>
         <Pressable onPress={() => router.dismiss()}>
           <Ionicons name="arrow-back" size={30} color="white" />
@@ -68,6 +81,11 @@ const style = StyleSheet.create({
     elevation: 9,
     top: 40,
     left: 10,
+  },
+  gradientStyle: {
+    position: "absolute",
+    zIndex: 1,
+    width: "100%",
   },
 });
 
