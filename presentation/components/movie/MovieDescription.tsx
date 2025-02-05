@@ -36,7 +36,7 @@ const style = StyleSheet.create({
   description: {
     fontWeight: "normal",
     marginVertical: 2,
-    color: 'gray'
+    color: "gray",
   },
   budget: {
     fontWeight: "bold",
@@ -44,4 +44,5 @@ const style = StyleSheet.create({
     fontSize: 20,
   },
 });
+
 export default MovieDescription;
