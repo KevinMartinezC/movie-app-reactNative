@@ -8,16 +8,16 @@ const queryClient = new QueryClient(); //almacena estados de peticiones, encarga
 const RootLayout = () => {
   return (
     <>
-    <StatusBar style='dark'/>
-    <QueryClientProvider client={queryClient}>
-      <Stack
-        screenOptions={{
-          headerShown: false,
-        }}
-      />
-    </QueryClientProvider>
-
+      <StatusBar style="dark" />
+      <QueryClientProvider client={queryClient}>
+        <Stack
+          screenOptions={{
+            headerShown: false,
+          }}
+        />
+      </QueryClientProvider>
     </>
-)};
+  );
+};
 
 export default RootLayout;

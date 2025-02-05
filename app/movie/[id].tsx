@@ -26,14 +26,14 @@ const MovieScreen = () => {
   }
 
   return (
-    <ScrollView style={{marginBottom: 30}}> 
+    <ScrollView style={{ marginBottom: 30 }}>
       <MovieHeader
         poster={movieQuery.data.poster}
         originalTitle={movieQuery.data.originalTitle}
         title={movieQuery.data.title}
       />
       <MovieDescription movie={movieQuery.data} />
-      <MovieCredits actors={credistQuery.data ?? []}/>
+      <MovieCredits actors={credistQuery.data ?? []} />
     </ScrollView>
   );
 };
